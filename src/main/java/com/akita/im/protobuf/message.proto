@@ -1,0 +1,104 @@
+// protoc -I=. --java_out=../../../../ message.proto
+
+syntax = "proto3"; // 声明为protobuf 3定义文件
+package im;
+
+option java_package = "com.akita.im.protobuf"; // 声明生成消息类的java包路径
+option java_outer_classname = "Message";  // 声明生成消息类的类名
+
+enum CallType {
+  AUTH = 0;
+  HEARTBEAT = 1;
+  MESSAGE = 2;
+  ACK_MESSAGE = 3;
+  MESSAGE_READ = 4;
+  ACK_MESSAGE_READ = 5;
+  SYSTEM = 6;
+  ACK_SYSTEM = 7;
+}
+
+message Call {
+  int32 type = 1;
+  bytes content = 2;
+}
+
+enum PlatformType {
+  android = 0;
+  iphone = 1;
+  ipad = 2;
+  windows = 3;
+  mac = 4;
+  browser = 5;
+}
+
+message Auth {
+  string userid = 1;
+  string token = 2;
+  PlatformType platform = 3;
+  bool success = 4;
+}
+
+
+enum MsgType {
+  TEXT_SIMPLE = 0;
+  TEXT_RICH = 1;
+  TEXT_HTML = 2;
+  PICTURE = 3;
+  PICTURE_LIST = 4;
+  FILE = 5;
+  FILE_LIST = 6;
+  MEDIA_VOICE = 7;
+  MEDIA_VIDEO = 8;
+  EMOTICON = 9;
+  VIDEO_CALL = 10;
+  VIDEO_CALL_ANSWER = 11;
+  VIDEO_CALL_REFUSE =12;
+  VIDEO_CALL_STOP =13;
+  VIDEO_CALL_MSG =14;
+  SILENT_PUSH = 200;
+  RECALL_MESSAGE = 201;
+}
+
+message MsgData {
+  string uid = 1;
+  int32 type = 2;
+  string from = 3;
+  string to = 4;
+  string groupid = 5;
+  bytes content = 6;
+  PlatformType platform = 7;
+  string extra = 8;
+}
+
+message MsgContentText {
+  string text = 1;
+}
+
+message MsgContentFile {
+  string fileName = 1;
+  string fileUrl = 2;
+  string fileType = 3;
+  int32 fileSize = 4;
+  string thumbnailUrl = 5;
+}
+
+enum MsgMediaType {
+  VOICE = 0;
+  VIDEO = 1;
+}
+
+message MsgContentMedia {
+  string mediaUrl = 1;
+  MsgMediaType mediaType = 2;
+  int32 duration = 3;
+  int32 fileSize = 4;
+  string thumbnailUrl = 5;
+}
+
+message MsgRead {
+  string uid = 1;
+  string from = 2;
+  string to = 3;
+  PlatformType platform = 4;
+  string timestamp = 5;
+}

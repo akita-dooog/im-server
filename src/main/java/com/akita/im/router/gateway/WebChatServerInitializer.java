@@ -1,6 +1,6 @@
-package com.akita.im.chat;
+package com.akita.im.router.gateway;
 
-import com.akita.im.proto.Message;
+import com.akita.im.protobuf.Message;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
